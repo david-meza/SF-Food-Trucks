@@ -15,6 +15,31 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
 
   $scope.options = {scrollwheel: false};
 
+  $scope.map.circle = {
+    center: $scope.map.location,
+    // 2000 meters
+    radius: 2000,
+    stroke: {
+      color: '#08B21F',
+      weight: 2,
+      opacity: 1
+    },
+    fill: {
+      color: '#08B21F',
+      opacity: 0.5
+    },
+    draggable: true, // optional: defaults to false
+    clickable: true, // optional: defaults to true
+    editable: true, // optional: defaults to false
+    visible: true, // optional: defaults to true
+    events:{
+      radius_changed: function(circle, eventName, model, arguments){
+        console.log(circle.getBounds())
+        console.log("circle radius radius_changed");
+      }
+    }
+  }
+
 
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
