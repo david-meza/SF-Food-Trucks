@@ -4,7 +4,7 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   $log.currentLevel = $log.LEVELS.debug;
 
   // Define some variables to be able to initialize the map
-  $scope.markers = [];
+  $scope.markers = mapService.markers;
 
   $scope.map = {
     zoom: 15,
@@ -16,9 +16,9 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   $scope.options = {scrollwheel: false};
 
   $scope.map.circle = {
-    center: $scope.map.location,
-    // 2000 meters
-    radius: 2000,
+    center: $scope.map.location.coords,
+    // 500 meters
+    radius: 500,
     stroke: {
       color: '#08B21F',
       weight: 2,
@@ -40,14 +40,61 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     }
   }
 
+  console.log($scope.map.location.coords)
+
   $scope.map.myLocationMarker = {
-    idKey: 0
-    coords: $scope.map.location
-    click: '{expression}'
-    options: '{expression}'
-    events: '{expression}'
-    control: '{expression}'
-  }
+    id: 0,
+    coords: $scope.map.location.coords,
+    options: { draggable: true },
+    events: {
+      dragend: function (marker, eventName, args) {
+        $log.log('marker dragend');
+        $log.log(marker.getPosition().lat());
+        $log.log(marker.getPosition().lng());
+      }
+    }
+  };
+
+  $scope.genMarkers = function (trucks) {
+    mapService.generateMarkers(trucks);
+  };
+
+  $scope.map.truckMarkers = [
+        {
+          id: 1,
+          icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
+          latitude: 37.7633,
+          longitude: -122.4167,
+          showWindow: false,
+          options: {
+            labelAnchor: "22 0",
+            labelClass: "marker-labels"
+          }
+        },
+        {
+          id: 2,
+          icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
+          latitude: 37.7839,
+          longitude: -122.4167,
+          showWindow: false,
+          options: {
+            labelAnchor: "22 0",
+            labelClass: "marker-labels",
+            draggable: true
+          }
+        },
+        {
+          id: 3,
+          icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
+          latitude: 37.7830,
+          longitude: -122.4167,
+          showWindow: false,
+          options: {
+            labelAnchor: "22 0",
+            labelClass: "marker-labels"
+          }
+        }
+      ]
 
 
   // uiGmapGoogleMapApi is a promise.
