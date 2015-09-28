@@ -1,0 +1,26 @@
+{
+  "name": "SF-Food-Trucks",
+  "version": "0.0.0",
+  "homepage": "https://github.com/david-meza/SF-Food-Trucks",
+  "authors": [
+    "(Xin Liu)",
+    "(David Meza)"
+  ],
+  "description": "Finding the nearest food trucks",
+  "main": "README",
+  "moduleType": [],
+  "keywords": [
+    "food-trucks"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
