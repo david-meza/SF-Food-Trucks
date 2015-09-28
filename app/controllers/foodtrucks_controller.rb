@@ -4,7 +4,7 @@ class FoodtrucksController < ApplicationController
     foodtrucks = Foodtruck.find_in_range(query_params)
 
     respond_to do |format|
-      format.json { render: foodtrucks }
+      format.json { render json: foodtrucks }
     end
 
   end

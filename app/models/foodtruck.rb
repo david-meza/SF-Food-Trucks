@@ -9,9 +9,9 @@ class Foodtruck < ActiveRecord::Base
   before_create :get_coords
 
   def self.find_in_range(query_params)
-    ori_lat = query_params[:lat]
-    ori_lon = query_params[:lon]
-    radius = query_params[:radius]
+    ori_lat = query_params[:lat].to_f
+    ori_lon = query_params[:lon].to_f
+    radius = query_params[:radius].to_f
     # self.find_by_sql("SELECT * FROM foodtrucks
     #                   WHERE distance(?, ?, longitude, latitude) <= ?", 
     #                   ori_lon, ori_lat, radius)
