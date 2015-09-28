@@ -9,6 +9,9 @@ gem 'figaro'
 # Bootstrap
 gem "twitter-bootstrap-rails"
 
+# Use geocoder to covert locations to latitudes and longitudes
+gem 'geocoder'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use pg as the database for Active Record
