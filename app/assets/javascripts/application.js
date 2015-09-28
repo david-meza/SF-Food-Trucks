@@ -14,7 +14,12 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 
-//= require angular
+//= require lodash/lodash.min
+
+//= require angular/angular
+
+//= require angular-simple-logger/dist/angular-simple-logger.min
+//= require angular-google-maps/dist/angular-google-maps.min
 //= require angular-ui-router.min
 //= require underscore-min
 //= require restangular.min
