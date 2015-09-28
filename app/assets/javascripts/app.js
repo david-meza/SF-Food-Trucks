@@ -7,3 +7,8 @@ var ft = angular.module('ft', ['ui.router', 'restangular', 'uiGmapgoogle-maps'])
     libraries: 'geometry,visualization'
   });
 }])
+
+.config(function(RestangularProvider) {
+  RestangularProvider.setBaseUrl('/api/v1');
+  RestangularProvider.setRequestSuffix('.json');
+})
