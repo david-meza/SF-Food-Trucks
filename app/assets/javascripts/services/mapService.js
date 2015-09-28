@@ -59,14 +59,14 @@ ft.factory("mapService", ['Restangular', function(Restangular){
   var clusterTypes = ['standard','food_truck'];
   var selectedClusterTypes = {
     food_truck:{
-      title: 'Beer!',
+      title: 'Food!',
       gridSize: 60,
       ignoreHidden: true,
       minimumClusterSize: 2,
       enableRetinaIcons: true,
       styles: [{
-        url: 'assets/images/food_truck.png',
-        textColor: '#ddddd',
+        url: 'http://dribbble.s3.amazonaws.com/users/41719/screenshots/1176590/food_truck.png',
+        textColor: '#ccc',
         textSize: 18,
         width: 33,
         height: 33,
