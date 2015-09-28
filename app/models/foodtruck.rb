@@ -13,8 +13,8 @@ class Foodtruck < ActiveRecord::Base
     ori_lon = query_params[:lon].to_f
     radius = query_params[:radius].to_f
     # self.find_by_sql("SELECT * FROM foodtrucks
-    #                   WHERE distance(?, ?, longitude, latitude) <= ?", 
-    #                   ori_lon, ori_lat, radius)
+    #                   WHERE #{self.distance(ori_lon, ori_lat, longitude, latitude)} <= ?", 
+    #                   radius)
     self.find_openings.where("longitude <= ? AND longitude >= ?", 
                               ori_lon + (radius.to_f / MILES_PER_DEGREE_LON), 
                               ori_lon - (radius.to_f / MILES_PER_DEGREE_LON))
@@ -47,6 +47,12 @@ class Foodtruck < ActiveRecord::Base
   #   c = 2 * Math.atan2(Math.sqrt(haversine), Math.sqrt(1-haversine))
 
   #   EARTH_RADIUS * c
+  # end
+
+
+  # def self.distance(ori_lon, ori_lat, des_lon, des_lat)
+  #   Geocoder::Calculations.distance_between([ori_lat, ori_lon], 
+  #                                           [des_lat, des_lon])
   # end
 
 end

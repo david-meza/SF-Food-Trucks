@@ -4,6 +4,6 @@ var ft = angular.module('ft', ['ui.router', 'restangular', 'uiGmapgoogle-maps'])
   GoogleMapApi.configure({
 //    key: 'your api key',
     // v: '3.20',
-    libraries: 'weather,geometry,visualization'
+    libraries: 'geometry,visualization'
   });
 }])

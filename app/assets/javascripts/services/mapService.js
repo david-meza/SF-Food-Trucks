@@ -1,6 +1,7 @@
 ft.factory("mapService", ['Restangular', function(Restangular){
 
   var location = {};
+  var markers = [];
   // Temporary coordinates while Geoloc gets us the user's coords
   location.coords = {
     latitude: 37.7833,
@@ -16,10 +17,16 @@ ft.factory("mapService", ['Restangular', function(Restangular){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         console.log(position)
-        // Update the location obj with the accurate user coords
-        location.coords = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude
+        var lat = position.coords.latitude
+        var lng = position.coords.longitude
+        // If we are in SF use those coords
+        if (lat < 37.78605 && lat > 37.69375 && lng > -122.36483 && lng < -122.52138) {
+          // Update the location obj with the accurate user coords
+          location.coords = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          };
+        // Otherwise, use default coordinates
         };
       });
     } else {
@@ -30,9 +37,51 @@ ft.factory("mapService", ['Restangular', function(Restangular){
 
   getCoords();
 
+  var generateMarkers = function (food_trucks) {
+    for (var i = 0; i < food_trucks; i++) {
+      markers.push(createRandomMarker(food_trucks[i]));
+    }
+  };
+
+  var createMarker = function (truck) {
+    var idKey = truck.id
+    var latitude = truck.latitude;
+    var longitude = truck.longitude;
+    var marker = {
+      latitude: latitude,
+      longitude: longitude,
+      title: truck.name
+    };
+    return marker;
+  };
+
+
+  var clusterTypes = ['standard','food_truck'];
+  var selectedClusterTypes = {
+    food_truck:{
+      title: 'Beer!',
+      gridSize: 60,
+      ignoreHidden: true,
+      minimumClusterSize: 2,
+      enableRetinaIcons: true,
+      styles: [{
+        url: 'assets/images/food_truck.png',
+        textColor: '#ddddd',
+        textSize: 18,
+        width: 33,
+        height: 33,
+      }]
+    },
+    standard:{
+      title: 'Many food trucks in this area', gridSize: 60, ignoreHidden: true, minimumClusterSize: 2
+    }
+  };
+
 
   return {
-    location: location
+    location: location,
+    markers: markers,
+    generateMarkers: generateMarkers,
   }
 }]);
 
