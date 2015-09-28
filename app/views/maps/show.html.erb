@@ -19,14 +19,26 @@
                     events='map.circle.events'>
     </ui-gmap-circle>
 
-    <ui-gmap-marker
-        idKey='{expression}'
-        coords='{expression}'
-        click='{expression}'
-        options='{expression}'
-        events='{expression}'
-        control='{expression}'>
+    <ui-gmap-marker idKey='map.myLocationMarker.id'
+                    coords='map.myLocationMarker.coords'>
     </ui-gmap-marker>
+
+    <ui-gmap-markers  models="map.truckMarkers"
+                      coords="'self'"
+                      icon="'icon'"
+                      click="onMarkerClicked"
+                      options="'options'"
+                      events="map.truckMarkerEvents">
+        <ui-gmap-windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+            <div>
+                <b>Yummy food</b>
+
+                <p>Address goes here</p>
+
+                <p class="text-muted">My marker will stay open when the window is popped up!</p>
+            </div>
+        </ui-gmap-windows>
+    </ui-gmap-markers>
 
   </ui-gmap-google-map>
 
