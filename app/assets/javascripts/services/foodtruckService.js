@@ -1,7 +1,7 @@
 ft.factory('foodtruckService', ['Restangular', function(Restangular) {
   var foodTrucks = {};
 
-  function getFoodTrucks (lat, lon, radius) {
+  function getFoodTrucks(lat, lon, radius) {
     var kwargs = {
       lat: lat,
       lon: lon,
