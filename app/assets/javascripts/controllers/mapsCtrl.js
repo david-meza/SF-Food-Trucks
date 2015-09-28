@@ -40,6 +40,15 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     }
   }
 
+  $scope.map.myLocationMarker = {
+    idKey: 0
+    coords: $scope.map.location
+    click: '{expression}'
+    options: '{expression}'
+    events: '{expression}'
+    control: '{expression}'
+  }
+
 
   // uiGmapGoogleMapApi is a promise.
   // The "then" callback function provides the google.maps object.
