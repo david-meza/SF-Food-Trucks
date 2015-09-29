@@ -14,8 +14,6 @@ data = JSON.parse(file)
 
 data.each do |entry|
 
-  sleep 2 unless entry['longitude'] && entry['latitude']
-
   Foodtruck.create(
     status: entry['status'].upcase,
     permit: entry['permit'],
@@ -33,11 +31,13 @@ data.each do |entry|
     fooditems: entry['fooditems'],
     # Leave nil so Geocoder can find the location associated with the address
     longitude: entry['longitude'].nil? ? nil : entry['longitude'].to_f,
-    latitude: entry['latitude'].nil? ? nil : entry['longitude'].to_f,
+    latitude: entry['latitude'].nil? ? nil : entry['latitude'].to_f,
     # We can leave it nil, the validations will take care of setting it to a default
     expiration_date: entry['expirationdate'].nil? ? nil : entry['expirationdate'].to_datetime.to_s(:db),
     objectid: entry['objectid'],
     dayshours: entry['dayshours']
   )
+
+  sleep 2 unless entry['longitude'] && entry['latitude']
 
 end
