@@ -1,7 +1,7 @@
 ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, $filter) {
   var foodTrucks = {};
   var markers = {};
-  var idShowing = null;
+  var idShowing = {};
 
   function getFoodTrucks(lat, lon, radius) {
     var kwargs = {
@@ -29,7 +29,8 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
         icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
         latitude: ele.latitude,
         longitude: ele.longitude,
-        showWindow: false,
+        // showWindow: false,
+        showWindow: idShowing.id == ele.id ? true : false,
         options: {
           title: ele.applicant,
           labelAnchor: "22 0",
@@ -45,21 +46,22 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
   function onMarkerClicked() {
     console.log("clicked marker")
     console.log(this)
-    
+
     // If idShowing is not null, meaning another marker window is shown, 
     // then set showWindow of that marker window to false.
-    if(idShowing){
-      var tohide=$filter('filter')(markers.content,{id:idShowing})[0];
-      tohide.showWindow = false;
+    if(idShowing.id){
+      var tohide = $filter('filter')(markers.content,{id:idShowing.id})[0];
+      if (tohide) tohide.showWindow = false;
     }
 
-    idShowing = this.id;
+    idShowing.id = this.id;
     this.showWindow = true;
   }
 
   return {
     foodTrucks: foodTrucks,
     markers: markers,
+    idShowing: idShowing,
     getFoodTrucks: getFoodTrucks
   }
 }])

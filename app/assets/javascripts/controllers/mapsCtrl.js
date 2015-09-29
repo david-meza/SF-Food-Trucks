@@ -8,6 +8,9 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   $scope.markers = mapService.markers;
   $scope.foodTrucks = foodTruckService.foodTrucks;
 
+  // Track previous opened marker window
+  $scope.idShowing = foodTruckService.idShowing;
+
   // Maps settings
   $scope.map = {
     zoom: 16,
@@ -61,7 +64,7 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
                                  $scope.map.location.coords.longitude,
                                  $scope.map.circle.radius / 1909.34 );
 
-  $scope.$watchGroup(['change.radius', 'map.location.coords.latitude'], function(newVal, oldVal){
+  $scope.$watchGroup(['change.radius', 'map.location.coords.latitude', 'map.location.coords.longitude'], function(newVal, oldVal){
     foodTruckService.getFoodTrucks($scope.map.location.coords.latitude,
                                    $scope.map.location.coords.longitude,
                                    $scope.map.circle.radius / 1909.34 );
