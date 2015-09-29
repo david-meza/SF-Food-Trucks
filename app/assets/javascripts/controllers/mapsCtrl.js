@@ -25,6 +25,12 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     }
   }
   $scope.options = {scrollwheel: false};
+  
+
+  $scope.userLoc = {
+    latitude: mapService.location.coords.latitude,
+    longitude: mapService.location.coords.longitude
+  }
 
 
   // Map circle (radius to find food trucks)
@@ -70,7 +76,8 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   // Marker for current location (Geolocation or dragging map to a different location)
   $scope.map.myLocationMarker = {
     id: 0,
-    coords: $scope.map.location.coords,
+    // coords: $scope.map.location.coords,
+    coords: $scope.userLoc,
     options: { draggable: false, clickable: false },
     events: {
       dragend: function (marker, eventName, args) {
@@ -88,10 +95,12 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   // Search box
   var events = {
     places_changed: function (searchBox) {
-      console.log(searchBox.getPlaces()[0].geometry.location)
-      var loc = searchBox.getPlaces()[0].geometry.location
-      $scope.map.location.coords.latitude = loc['A']
-      $scope.map.location.coords.longitude = loc['F']
+      // console.log(searchBox.getPlaces()[0].geometry.location);
+      var loc = searchBox.getPlaces()[0];
+      if (loc && loc.geometry && loc.geometry.location) {
+        $scope.map.location.coords.latitude = loc['A'];
+        $scope.map.location.coords.longitude = loc['F'];
+      }
     }
   }
   $scope.searchbox = {
@@ -108,5 +117,11 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     maps.visualRefresh = true;
   });
 
+  // Provide directions from user's current location to food trucks
+  // $scope.getDirection = function() {
+  //   var directionsService = new google.maps.DirectionsService();
+  //   var directionsDisplay = new google.maps.DirectionsRenderer();
+  // }
 
+  // $scope.getDirection();
 }])

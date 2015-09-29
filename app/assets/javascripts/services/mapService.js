@@ -20,7 +20,7 @@ ft.factory("mapService", function(){
         var lat = position.coords.latitude
         var lon = position.coords.longitude
         // If we are in SF use those coords
-        if (_inSF(lat, lon)) {
+        if (_isInSF(lat, lon)) {
           // Update the location obj with the accurate user coords
           location.coords = {
             latitude: lat,
@@ -37,7 +37,7 @@ ft.factory("mapService", function(){
     }
   }
 
-  function _inSF(lat, lon) {
+  function _isInSF(lat, lon) {
     return lat < 37.78605   && 
            lat > 37.69375   && 
            lon > -122.36483 && 
@@ -57,7 +57,6 @@ ft.factory("mapService", function(){
     };
     return marker;
   };
-
 
   var clusterTypes = ['standard','food_truck'];
   var selectedClusterTypes = {
@@ -80,9 +79,9 @@ ft.factory("mapService", function(){
     }
   };
 
-
   return {
-    location: location
+    location: location,
+    getCoords: getCoords
   }
 });
 
