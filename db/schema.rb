@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928161639) do
+ActiveRecord::Schema.define(version: 20150929160725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,15 +28,16 @@ ActiveRecord::Schema.define(version: 20150928161639) do
     t.string   "priorpermit"
     t.string   "schedule"
     t.string   "address"
-    t.string   "applicant"
+    t.string   "applicant",                                           null: false
     t.string   "lot"
     t.string   "fooditems"
-    t.float    "longitude"
-    t.float    "latitude"
+    t.float    "longitude",                                           null: false
+    t.float    "latitude",                                            null: false
     t.string   "objectid"
     t.string   "dayshours"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.datetime "expiration_date",     default: '2015-09-29 12:15:08', null: false
   end
 
 end

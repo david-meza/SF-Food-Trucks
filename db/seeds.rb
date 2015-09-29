@@ -13,7 +13,9 @@ file = File.read("./app/models/sf-ft.json")
 data = JSON.parse(file)
 
 data.each do |entry|
-  Foodtruck.create(status: entry['status'],
+
+  Foodtruck.create(
+    status: entry['status'].upcase,
     permit: entry['permit'],
     block: entry['block'],
     received: entry['received'],
@@ -27,9 +29,15 @@ data.each do |entry|
     applicant: entry['applicant'],
     lot: entry['lot'],
     fooditems: entry['fooditems'],
-    longitude: entry['longitude'].to_f,
-    latitude: entry['latitude'].to_f,
+    # Leave nil so Geocoder can find the location associated with the address
+    longitude: entry['longitude'].nil? ? nil : entry['longitude'].to_f,
+    latitude: entry['latitude'].nil? ? nil : entry['latitude'].to_f,
+    # We can leave it nil, the validations will take care of setting it to a default
+    expiration_date: entry['expirationdate'].nil? ? nil : entry['expirationdate'].to_datetime.to_s(:db),
     objectid: entry['objectid'],
     dayshours: entry['dayshours']
   )
+
+  sleep 2 unless entry['longitude'] && entry['latitude']
+
 end
