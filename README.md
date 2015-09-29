@@ -1,3 +1,3 @@
 # SF Satisfy Hunger
 
-Live Demo : [Go!](http://sf-satisfy-hunger.herokuapp.com/)
+Live Demo : [View!](http://sf-satisfy-hunger.herokuapp.com/)
