@@ -83,5 +83,5 @@ ft.factory("mapService", function(){
     markers: markers,
     generateMarkers: generateMarkers,
   }
-}]);
+});
 
