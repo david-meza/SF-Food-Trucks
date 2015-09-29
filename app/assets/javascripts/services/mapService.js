@@ -19,17 +19,7 @@ ft.factory("mapService", function(){
         console.log(position)
         var lat = position.coords.latitude
         var lon = position.coords.longitude
-        // If we are in SF use those coords
-        if (_isInSF(lat, lon)) {
-          // Update the location obj with the accurate user coords
-          location.coords = {
-            latitude: lat,
-            longitude: lon
-          }
-        } // Otherwise, use default coordinates
-        else {     
-          alert("Sorry, our service is only available in SF! The map is redirected to SF.");
-        }
+        updateCoords(lat, lon);
       });
     } else {
       // Browser doesn't support Geolocation
@@ -40,8 +30,21 @@ ft.factory("mapService", function(){
   function _isInSF(lat, lon) {
     return lat < 37.78605   && 
            lat > 37.69375   && 
-           lon > -122.36483 && 
-           lon < -122.52138
+           lon > -122.52138 && 
+           lon < -122.36483
+  }
+
+  function updateCoords(lat, lon) {
+    if (_isInSF(lat, lon)) {
+      // Update the location obj with the accurate user coords
+      location.coords = {
+        latitude: lat,
+        longitude: lon
+      }
+    } else {
+      // Otherwise, use default coordinates
+      alert("Sorry, our service is only available in SF! The map is redirected to SF.");
+    }
   }
 
   getCoords();
@@ -81,7 +84,7 @@ ft.factory("mapService", function(){
 
   return {
     location: location,
-    getCoords: getCoords
+    updateCoords: updateCoords
   }
 });
 

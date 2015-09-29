@@ -95,12 +95,11 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   // Search box
   var events = {
     places_changed: function (searchBox) {
-      // console.log(searchBox.getPlaces()[0].geometry.location);
-      var loc = searchBox.getPlaces()[0];
-      if (loc && loc.geometry && loc.geometry.location) {
-        $scope.map.location.coords.latitude = loc['A'];
-        $scope.map.location.coords.longitude = loc['F'];
-      }
+      console.log(searchBox.getPlaces()[0].geometry.location);
+      var loc = searchBox.getPlaces()[0].geometry.location;
+      var latitude = loc['A'];
+      var longitude = loc['F'];
+      mapService.updateCoords(latitude, longitude);
     }
   }
   $scope.searchbox = {
