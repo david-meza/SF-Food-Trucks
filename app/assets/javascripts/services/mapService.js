@@ -1,7 +1,7 @@
 ft.factory("mapService", function(){
 
   var location = {};
-  var markers = [];
+  // var markers = [];
   // Temporary coordinates while Geoloc gets us the user's coords
   location.coords = {
     latitude: 37.7833,
@@ -37,11 +37,11 @@ ft.factory("mapService", function(){
 
   getCoords();
 
-  var generateMarkers = function (food_trucks) {
-    for (var i = 0; i < food_trucks; i++) {
-      markers.push(createRandomMarker(food_trucks[i]));
-    }
-  };
+  // var generateMarkers = function (food_trucks) {
+  //   for (var i = 0; i < food_trucks; i++) {
+  //     markers.push(createRandomMarker(food_trucks[i]));
+  //   }
+  // };
 
   var createMarker = function (truck) {
     var idKey = truck.id
@@ -80,8 +80,8 @@ ft.factory("mapService", function(){
 
   return {
     location: location,
-    markers: markers,
-    generateMarkers: generateMarkers,
+    // markers: markers,
+    // generateMarkers: generateMarkers,
   }
 });
 

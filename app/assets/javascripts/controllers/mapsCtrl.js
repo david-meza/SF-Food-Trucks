@@ -2,7 +2,7 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
                           function($scope, uiGmapGoogleMapApi, $log, mapService, foodTruckService) {
 
   // Logs Google Maps API events
-  $log.currentLevel = $log.LEVELS.debug;
+  // $log.currentLevel = $log.LEVELS.debug;
 
   // Define some variables to be able to initialize the map
   $scope.markers = mapService.markers;
@@ -82,9 +82,9 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   };
 
   // Reference to generate all food truck markers
-  $scope.genMarkers = function (trucks) {
-    mapService.generateMarkers(trucks);
-  };
+  // $scope.genMarkers = function (trucks) {
+  //   mapService.generateMarkers(trucks);
+  // };
 
   $scope.map.truckMarkers = foodTruckService.markers;
 

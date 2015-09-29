@@ -1,6 +1,7 @@
-ft.factory('foodTruckService', ['Restangular', function(Restangular) {
+ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, $filter) {
   var foodTrucks = {};
   var markers = {};
+  var idShowing = null;
 
   function getFoodTrucks(lat, lon, radius) {
     var kwargs = {
@@ -34,15 +35,26 @@ ft.factory('foodTruckService', ['Restangular', function(Restangular) {
           labelAnchor: "22 0",
           labelClass: "marker-labels"
         },
-        onMarkerClicked: function() {
-          console.log("clicked marker")
-          console.log(this)
-          this.showWindow = false;
-        }
+        onMarkerClicked: onMarkerClicked
       }
 
       markers.content.push(marker);
     })
+  }
+
+  function onMarkerClicked() {
+    console.log("clicked marker")
+    console.log(this)
+    
+    // If idShowing is not null, meaning another marker window is shown, 
+    // then set showWindow of that marker window to false.
+    if(idShowing){
+      var tohide=$filter('filter')(markers.content,{id:idShowing})[0];
+      tohide.showWindow = false;
+    }
+
+    idShowing = this.id;
+    this.showWindow = true;
   }
 
   return {
