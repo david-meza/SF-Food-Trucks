@@ -37,10 +37,8 @@ ft.factory("mapService", function(){
   function updateCoords(lat, lon) {
     if (_isInSF(lat, lon)) {
       // Update the location obj with the accurate user coords
-      location.coords = {
-        latitude: lat,
-        longitude: lon
-      }
+      location.coords.latitude = lat;
+      location.coords.longitude = lon;
     } else {
       // Otherwise, use default coordinates
       alert("Sorry, our service is only available in SF! The map is redirected to SF.");
