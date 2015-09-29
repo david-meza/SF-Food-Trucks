@@ -32,7 +32,10 @@
     <ui-gmap-markers  models="map.truckMarkers.content"
                       coords="'self'"
                       icon="'icon'"
-                      click="onMarkerClicked"
+                      click="onMarkerClicked()"
+                      doCluster="map.clusterMarkers"
+                      clusterOptions="map.clusterOptions"
+                      modelsbyref="true"
                       options="'options'"
                       events="map.truckMarkerEvents">
 

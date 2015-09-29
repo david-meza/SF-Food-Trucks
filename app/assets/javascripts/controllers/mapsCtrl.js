@@ -14,6 +14,13 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     dragging: false,
     refresh: false,
     location: mapService.location,
+    clusterMarkers: true,
+    clusterOptions: {
+      title: 'Zoom in to find food!',
+      gridSize: 60,
+      ignoreHidden: true,
+      minimumClusterSize: 3
+    }
   }
   $scope.options = {scrollwheel: false};
 

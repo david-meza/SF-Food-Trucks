@@ -33,6 +33,11 @@ ft.factory('foodTruckService', ['Restangular', function(Restangular) {
           title: ele.applicant,
           labelAnchor: "22 0",
           labelClass: "marker-labels"
+        },
+        onMarkerClicked: function() {
+          console.log("clicked marker")
+          console.log(this)
+          this.showWindow = false;
         }
       }
 
