@@ -1,7 +1,7 @@
 ft.factory("mapService", function(){
 
   var location = {};
-  // var markers = [];
+
   // Temporary coordinates while Geoloc gets us the user's coords
   location.coords = {
     latitude: 37.7833,
@@ -18,16 +18,18 @@ ft.factory("mapService", function(){
       navigator.geolocation.getCurrentPosition(function(position) {
         console.log(position)
         var lat = position.coords.latitude
-        var lng = position.coords.longitude
+        var lon = position.coords.longitude
         // If we are in SF use those coords
-        if (lat < 37.78605 && lat > 37.69375 && lng > -122.36483 && lng < -122.52138) {
+        if (_inSF(lat, lon)) {
           // Update the location obj with the accurate user coords
           location.coords = {
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-          };
-        // Otherwise, use default coordinates
-        };
+            latitude: lat,
+            longitude: lon
+          }
+        } // Otherwise, use default coordinates
+        else {     
+          alert("Sorry, our service is only available in SF! The map is redirected to SF.");
+        }
       });
     } else {
       // Browser doesn't support Geolocation
@@ -35,13 +37,14 @@ ft.factory("mapService", function(){
     }
   }
 
-  getCoords();
+  function _inSF(lat, lon) {
+    return lat < 37.78605   && 
+           lat > 37.69375   && 
+           lon > -122.36483 && 
+           lon < -122.52138
+  }
 
-  // var generateMarkers = function (food_trucks) {
-  //   for (var i = 0; i < food_trucks; i++) {
-  //     markers.push(createRandomMarker(food_trucks[i]));
-  //   }
-  // };
+  getCoords();
 
   var createMarker = function (truck) {
     var idKey = truck.id
@@ -79,9 +82,7 @@ ft.factory("mapService", function(){
 
 
   return {
-    location: location,
-    // markers: markers,
-    // generateMarkers: generateMarkers,
+    location: location
   }
 });
 

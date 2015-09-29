@@ -5,7 +5,6 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   // $log.currentLevel = $log.LEVELS.debug;
 
   // Define some variables to be able to initialize the map
-  $scope.markers = mapService.markers;
   $scope.foodTrucks = foodTruckService.foodTrucks;
 
   // Track previous opened marker window
@@ -47,22 +46,20 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     editable: true, // optional: defaults to false
     visible: true, // optional: defaults to true
     events:{
-      radius_changed: function(circle, eventName, model, arguments){
-        console.log(circle.getBounds())
-        console.log("circle radius radius_changed", circle.getRadius());
-        $scope.change.radius = circle.getRadius();
-      }
+      radius_changed: radius_changed
     }
   }
 
-  // Makes an API call when map radius change or the current location is changed
+  function radius_changed(circle, eventName, model, arguments) {
+    console.log(circle.getBounds())
+    console.log("circle radius radius_changed", circle.getRadius());
+    $scope.change.radius = circle.getRadius();
+  }
+
+  // Makes an API call to update foodTrucks when map radius or the current location is changed
   $scope.change = { radius: $scope.map.circle.radius };
 
   console.log($scope.map.location.coords)
-
-  foodTruckService.getFoodTrucks($scope.map.location.coords.latitude,
-                                 $scope.map.location.coords.longitude,
-                                 $scope.map.circle.radius / 1909.34 );
 
   $scope.$watchGroup(['change.radius', 'map.location.coords.latitude', 'map.location.coords.longitude'], function(newVal, oldVal){
     foodTruckService.getFoodTrucks($scope.map.location.coords.latitude,
@@ -74,7 +71,7 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
   $scope.map.myLocationMarker = {
     id: 0,
     coords: $scope.map.location.coords,
-    options: { draggable: true },
+    options: { draggable: false, clickable: false },
     events: {
       dragend: function (marker, eventName, args) {
         $log.log('marker dragend');
@@ -84,11 +81,7 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'uiGmapLogger', 'mapS
     }
   };
 
-  // Reference to generate all food truck markers
-  // $scope.genMarkers = function (trucks) {
-  //   mapService.generateMarkers(trucks);
-  // };
-
+  // Get Food Truck Markers
   $scope.map.truckMarkers = foodTruckService.markers;
 
 

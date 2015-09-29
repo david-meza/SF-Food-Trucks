@@ -29,7 +29,6 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
         icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
         latitude: ele.latitude,
         longitude: ele.longitude,
-        // showWindow: false,
         showWindow: idShowing.id == ele.id ? true : false,
         options: {
           title: ele.applicant,
