@@ -1,7 +1,3 @@
-1. food truck API
+# SF Satisfy Hunger
 
-send coords and get food trucks within a certain radius
-
-2. google map API
-
-place marker on coords
+Live Demo : [Go!](http://sf-satisfy-hunger.herokuapp.com/)
