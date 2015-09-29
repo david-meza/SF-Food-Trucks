@@ -22,11 +22,15 @@ ft.factory('foodTruckService', ['Restangular', function(Restangular) {
     data.forEach(function(ele){
       var marker = {
         id: ele.id,
+        applicant: ele.applicant,
+        fooditems: ele.fooditems,
+        dayshours: ele.dayshours,
         icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
         latitude: ele.latitude,
         longitude: ele.longitude,
         showWindow: false,
         options: {
+          title: ele.applicant,
           labelAnchor: "22 0",
           labelClass: "marker-labels"
         }

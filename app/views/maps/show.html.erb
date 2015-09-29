@@ -8,6 +8,12 @@
                       pan='true' >
 
 
+    <ui-gmap-search-box template="searchbox.template"
+                        events="searchbox.events">
+    </ui-gmap-search-box>
+
+
+
     <ui-gmap-circle center='map.circle.center'
                     radius='map.circle.radius'
                     stroke='map.circle.stroke'
@@ -29,13 +35,16 @@
                       click="onMarkerClicked"
                       options="'options'"
                       events="map.truckMarkerEvents">
-        <ui-gmap-windows show="'showWindow'" closeClick="'closeClick'" ng-cloak>
+
+
+        <ui-gmap-windows  show="'showWindow'"
+                          closeClick="'closeClick'" ng-cloak>
             <div>
-                <b>Yummy food</b>
+                <b ng-non-bindable> {{ applicant }}</b>
 
-                <p>Address goes here</p>
+                <p ng-non-bindable> {{ dayshours }}</p>
 
-                <p class="text-muted">My marker will stay open when the window is popped up!</p>
+                <p ng-non-bindable class="text-muted">{{ fooditems | limitTo : 60 }}...</p>
             </div>
         </ui-gmap-windows>
     </ui-gmap-markers>
