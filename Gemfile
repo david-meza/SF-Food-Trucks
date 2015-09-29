@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
 # Angular
 gem 'angularjs-rails'
 gem 'angular_rails_csrf'
@@ -61,5 +63,12 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+end
+
+group :production do
+
+  gem 'rails_12factor'
+  gem 'puma'
+
 end
 

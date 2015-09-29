@@ -1,4 +1,4 @@
-ft.factory("mapService", ['Restangular', function(Restangular){
+ft.factory("mapService", function(){
 
   var location = {};
   var markers = [];
