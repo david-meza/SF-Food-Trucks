@@ -1,4 +1,4 @@
-var ft = angular.module('ft', ['ui.router', 'restangular', 'uiGmapgoogle-maps'])
+var ft = angular.module('ft', ['restangular', 'uiGmapgoogle-maps', 'flash'])
 
 .config(['uiGmapGoogleMapApiProvider', function (GoogleMapsApi) {
   GoogleMapsApi.configure({

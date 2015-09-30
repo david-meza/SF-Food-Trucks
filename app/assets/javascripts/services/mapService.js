@@ -1,4 +1,4 @@
-ft.factory("mapService", function(){
+ft.factory("mapService", ['Flash', function(Flash){
 
   var location = {};
 
@@ -16,10 +16,11 @@ ft.factory("mapService", function(){
     refresh: false,
     pan: false,
     location: location,
+    control: {},
     options: {
       scrollwheel: false,
       mapTypeControlOptions: {
-        mapTypeIds: ['light_dream']
+        mapTypeIds: ['light_dream', 'roadmap']
       }
     },
     clusterMarkers: true,
@@ -31,7 +32,9 @@ ft.factory("mapService", function(){
     }
   };
 
-  map.styles = [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+  // Optional map themes
+  // map.options.styles = [{"featureType":"landscape","stylers":[{"hue":"#FFBB00"},{"saturation":43.400000000000006},{"lightness":37.599999999999994},{"gamma":1}]},{"featureType":"road.highway","stylers":[{"hue":"#FFC200"},{"saturation":-61.8},{"lightness":45.599999999999994},{"gamma":1}]},{"featureType":"road.arterial","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":51.19999999999999},{"gamma":1}]},{"featureType":"road.local","stylers":[{"hue":"#FF0300"},{"saturation":-100},{"lightness":52},{"gamma":1}]},{"featureType":"water","stylers":[{"hue":"#0078FF"},{"saturation":-13.200000000000003},{"lightness":2.4000000000000057},{"gamma":1}]},{"featureType":"poi","stylers":[{"hue":"#00FF6A"},{"saturation":-1.0989010989011234},{"lightness":11.200000000000017},{"gamma":1}]}]
+  map.options.styles = [{"featureType":"water","stylers":[{"visibility":"on"},{"color":"#b5cbe4"}]},{"featureType":"landscape","stylers":[{"color":"#efefef"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#83a5b0"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#bdcdd3"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e3eed3"}]},{"featureType":"administrative","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"road"},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{},{"featureType":"road","stylers":[{"lightness":20}]}]
 
   // Map circle (radius to find food trucks)
   map.circle = {
@@ -78,9 +81,12 @@ ft.factory("mapService", function(){
       // Update the location obj with the accurate user coords
       location.coords.latitude = lat;
       location.coords.longitude = lon;
+      map.circle.center.latitude = lat;
+      map.circle.center.longitude = lon;
     } else {
       // Otherwise, keep using default coordinates
-      location.notInSF = true;
+      var message = '<strong> Oops!</strong>  It seems this location is not in San Francisco.';
+      Flash.create('warning', message);
     }
   }
 
@@ -101,5 +107,6 @@ ft.factory("mapService", function(){
     updateCoords: updateCoords,
     map: map,
   }
-});
+
+}]);
 

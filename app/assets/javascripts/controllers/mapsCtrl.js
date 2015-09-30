@@ -4,32 +4,14 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', 'foodTr
   // Define some variables to be able to initialize the map
   $scope.foodTrucks = foodTruckService.foodTrucks;
 
-  // Track previous opened marker window
-  $scope.idShowing = foodTruckService.idShowing;
-
   // Maps settings
   $scope.map = mapService.map
 
   // Get our map instance when it loads
   $scope.map.events = {
-    tilesloaded: function (map) {
-      $scope.mapInstance = map
-      styleMap($scope.gmaps, map)
-      // $scope.$apply(function () {
-      // });
+    tilesloaded: function () {
+      $scope.mapInstance = $scope.map.control.getGMap()
     }
-  };
-
-  // Nicer style. Still allow switching back to default
-  var styleMap = function() {
-    $scope.map.options.mapTypeControlOptions.mapTypeIds.push($scope.gmaps.MapTypeId.ROADMAP)
-    // Create a new StyledMapType object, passing it the array of styles,
-    // as well as the name to be displayed on the map type control.
-    var styledMap = $scope.gmaps.StyledMapType($scope.map.styles, { name: "Light Dream Map" });
-
-    //Associate the styled map with the MapTypeId and set it to display.
-    $scope.mapInstance.mapTypes.set('light_dream', styledMap);
-    $scope.mapInstance.setMapTypeId('light_dream');
   };
 
   // Grab location from map service
@@ -59,7 +41,6 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', 'foodTr
   // Search box
   var events = {
     places_changed: function (searchBox) {
-      console.log(searchBox.getPlaces()[0].geometry.location);
       var loc = searchBox.getPlaces()[0].geometry.location;
       var latitude = loc['A'];
       var longitude = loc['F'];

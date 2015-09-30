@@ -20,7 +20,7 @@
 
 //= require angular-simple-logger/dist/angular-simple-logger.min
 //= require angular-google-maps/dist/angular-google-maps.min
-//= require angular-ui-router.min
+//= require angular-flash-alert/dist/angular-flash.min
 //= require underscore-min
 //= require restangular.min
 

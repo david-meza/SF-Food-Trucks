@@ -1,7 +1,7 @@
-ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, $filter) {
+ft.factory('foodTruckService', ['Restangular', function(Restangular) {
   var foodTrucks = {};
   var markers = {};
-  var idShowing = {};
+  var currentMarker = { obj: {} };
 
   function getFoodTrucks(lat, lon, radius) {
     var kwargs = {
@@ -28,13 +28,13 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
         icon: 'https://s3.amazonaws.com/davidmeza/Food_Trucks/foodtruck-icon-web.png',
         latitude: ele.latitude,
         longitude: ele.longitude,
-        showWindow: idShowing.id == ele.id ? true : false,
+        showWindow: false,
+        onMarkerClicked: onMarkerClicked,
         options: {
           title: ele.applicant,
           labelAnchor: "22 0",
           labelClass: "marker-labels"
         },
-        onMarkerClicked: onMarkerClicked
       }
 
       markers.content.push(marker);
@@ -42,21 +42,17 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
   }
 
   function onMarkerClicked() {
-    // If idShowing is not null, meaning another marker window is shown,
+    // If currentMarker is not null, meaning another marker window is shown,
     // then set showWindow of that marker window to false.
-    if(idShowing.id){
-      var tohide = $filter('filter')(markers.content,{ id: idShowing.id } )[0];
-      if (tohide) tohide.showWindow = false;
-    }
-
-    idShowing.id = this.id;
+    currentMarker.obj.showWindow = false
+    currentMarker.obj = this
     this.showWindow = true;
+
   }
 
   return {
     foodTrucks: foodTrucks,
     markers: markers,
-    idShowing: idShowing,
     getFoodTrucks: getFoodTrucks
   }
 }])
