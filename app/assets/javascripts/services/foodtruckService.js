@@ -10,7 +10,6 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
       radius: radius
     }
     Restangular.all('foodtrucks').getList(kwargs).then(function(data){
-      console.log('get food trucks nearby: ', data);
       foodTrucks.list = data;
       markers.content = [];
       _generateMarkers(data);
@@ -43,13 +42,10 @@ ft.factory('foodTruckService', ['Restangular', '$filter', function(Restangular, 
   }
 
   function onMarkerClicked() {
-    console.log("clicked marker")
-    console.log(this)
-
-    // If idShowing is not null, meaning another marker window is shown, 
+    // If idShowing is not null, meaning another marker window is shown,
     // then set showWindow of that marker window to false.
     if(idShowing.id){
-      var tohide = $filter('filter')(markers.content,{id:idShowing.id})[0];
+      var tohide = $filter('filter')(markers.content,{ id: idShowing.id } )[0];
       if (tohide) tohide.showWindow = false;
     }
 

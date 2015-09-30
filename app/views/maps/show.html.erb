@@ -2,10 +2,11 @@
 
   <ui-gmap-google-map center='map.location.coords'
                       zoom='map.zoom'
-                      options = 'options'
+                      options = 'map.options'
                       dragging='map.dragging'
                       refresh='map.refresh'
-                      pan='true' >
+                      pan='map.pan'
+                      events = 'map.events' >
 
 
     <ui-gmap-search-box template="searchbox.template"
@@ -43,11 +44,11 @@
         <ui-gmap-windows  show="'showWindow'"
                           closeClick="'closeClick'" ng-cloak>
             <div>
-                <b ng-non-bindable> {{ applicant }}</b>
+              <h5 ng-non-bindable> {{ applicant }}</h5>
 
-                <p ng-non-bindable> {{ dayshours }}</p>
+              <p ng-non-bindable class="text-muted"> {{ dayshours }}</p>
 
-                <p ng-non-bindable class="text-muted">{{ fooditems | limitTo : 60 }}...</p>
+              <p ng-non-bindable>{{ fooditems | limitTo : 60 }}...</p>
             </div>
         </ui-gmap-windows>
     </ui-gmap-markers>
