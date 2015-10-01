@@ -27,13 +27,6 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', 'foodTr
                                    $scope.map.circle.radius / 1609.34 );
   })
 
-  // Marker for current location (Geolocation or dragging map to a different location)
-  $scope.map.myLocationMarker = {
-    id: 0,
-    coords: $scope.userLoc,
-    options: { draggable: false, clickable: false },
-  };
-
   // Get Food Truck Markers
   $scope.map.truckMarkers = foodTruckService.markers;
 

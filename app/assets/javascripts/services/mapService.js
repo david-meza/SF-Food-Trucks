@@ -57,6 +57,17 @@ ft.factory("mapService", ['Flash', function(Flash){
     visible: true,
   };
 
+  // Marker for current location (Geolocation or dragging map to a different location)
+  map.myLocationMarker = {
+    id: 0,
+    coords: { latitude: location.coords.latitude, longitude: location.coords.longitude },
+    options: {
+      draggable: false,
+      clickable: false,
+      icon: "https://s3.amazonaws.com/davidmeza/Food_Trucks/user.png",
+    },
+  };
+
   var getCoords = function() {
 
   // Try HTML5 geolocation.
@@ -73,6 +84,7 @@ ft.factory("mapService", ['Flash', function(Flash){
   getCoords();
 
   var _isInSF = function (lat, lon) {
+    // Test SF address: 37.775896, -122.454343
     return lat < 37.811072 && lat > 37.615523 && lon > -122.532921 && lon < -122.331047
   }
 
@@ -83,6 +95,8 @@ ft.factory("mapService", ['Flash', function(Flash){
       location.coords.longitude = lon;
       map.circle.center.latitude = lat;
       map.circle.center.longitude = lon;
+      map.myLocationMarker.coords.latitude = lat;
+      map.myLocationMarker.coords.longitude = lon;
     } else {
       // Otherwise, keep using default coordinates
       var message = '<strong> Oops!</strong>  It seems this location is not in San Francisco.';
