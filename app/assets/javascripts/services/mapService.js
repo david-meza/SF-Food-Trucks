@@ -104,18 +104,6 @@ ft.factory("mapService", ['Flash', function(Flash){
     }
   }
 
-  var createMarker = function (truck) {
-    var idKey = truck.id
-    var latitude = truck.latitude;
-    var longitude = truck.longitude;
-    var marker = {
-      latitude: latitude,
-      longitude: longitude,
-      title: truck.name
-    };
-    return marker;
-  };
-
   return {
     location: location,
     updateCoords: updateCoords,

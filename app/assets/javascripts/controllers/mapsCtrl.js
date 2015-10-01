@@ -14,12 +14,6 @@ ft.controller('mapsCtrl', ['$scope', 'uiGmapGoogleMapApi', 'mapService', 'foodTr
     }
   };
 
-  // Grab location from map service
-  $scope.userLoc = {
-    latitude: mapService.location.coords.latitude,
-    longitude: mapService.location.coords.longitude
-  };
-
   // Make an API call to update foodTrucks when map radius or the current location is changed
   $scope.$watchGroup(['map.circle.radius', 'map.circle.center.latitude', 'map.circle.center.longitude'], function(){
     foodTruckService.getFoodTrucks($scope.map.circle.center.latitude,
