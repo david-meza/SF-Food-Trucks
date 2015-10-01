@@ -6,7 +6,7 @@
 *  Optionally run `rspec` to make sure all tests are passing (which they should)
 *  Fire up your `rails server` and head to `localhost:3000` to check it out!
 
-This is [Alok's](https://github.com/david-meza) and [Joseph's](https://github.com/facingsouth) attempt at [Uber Coding Challenge #4](https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md#food-trucks).  This is a full stack application, making use of a Ruby on Rails API to serve data to an Angular front-end. Check it out [HERE](http://sf-satisfy-hunger.herokuapp.com/)
+This is [David's](https://github.com/david-meza) and [Xin's](https://github.com/facingsouth) attempt at [Uber Coding Challenge #4](https://github.com/uber/coding-challenge-tools/blob/master/coding_challenge.md#food-trucks).  This is a full stack application, making use of a Ruby on Rails API to serve data to an Angular front-end. Check it out [HERE](http://sf-satisfy-hunger.herokuapp.com/)
 
 ### Walkthrough
 
@@ -30,9 +30,13 @@ Our Front-end is built on AngularJS. We used Angular because the information we 
 
 #### Guided Tour
 Step 1. Visit [SF Satisfy Hunger](http://sf-satisfy-hunger.herokuapp.com/)
+
 Step 2. a. Accept the request to Geolocate you and find relevant results to your location, or...
+
 Step 2. b. Search for a particular address / place / food truck on the search box.
+
 Step 3. Click on one of the food truck icons to get details about a truck like name, schedule and type of food.
+
 Step 4. Enjoy a great meal!
 
 Live Demo : [View!](http://sf-satisfy-hunger.herokuapp.com/)
